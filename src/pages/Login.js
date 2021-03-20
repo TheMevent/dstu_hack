@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-
-export default class App extends React.Component {
+import {createStackNavigator} from 'react-navigation-stack'
+import {createAppContainer} from 'react-navigation'
+export default class Login extends React.Component {
   state={
     email:"",
     password:""
@@ -9,11 +10,11 @@ export default class App extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>Вход</Text>
+        <Text style={styles.logo}>HeyAPP</Text>
         <View style={styles.inputView} >
           <TextInput  
             style={styles.inputText}
-            placeholder="Почта..." 
+            placeholder="Email..." 
             placeholderTextColor="#003f5c"
             onChangeText={text => this.setState({email:text})}/>
         </View>
@@ -21,21 +22,23 @@ export default class App extends React.Component {
           <TextInput  
             secureTextEntry
             style={styles.inputText}
-            placeholder="Пароль..." 
+            placeholder="Password..." 
             placeholderTextColor="#003f5c"
             onChangeText={text => this.setState({password:text})}/>
         </View>
         <TouchableOpacity>
-          <Text style={styles.forgot}>Забыли пароль?</Text>
+          <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Войти</Text>
+          <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.loginText}>Зарегестрироваться</Text>
+          <Text 
+          onPress={() =>
+            this.props.navigation.navigate('Reg')
+          }
+          style={styles.loginText}>Signup</Text>
         </TouchableOpacity>
-
-  
       </View>
     );
   }
@@ -69,12 +72,12 @@ const styles = StyleSheet.create({
   },
   forgot:{
     color:"white",
-    fontSize:12
+    fontSize:11
   },
   loginBtn:{
     width:"80%",
     backgroundColor:"#fb5b5a",
-    borderRadius:15,
+    borderRadius:25,
     height:50,
     alignItems:"center",
     justifyContent:"center",
